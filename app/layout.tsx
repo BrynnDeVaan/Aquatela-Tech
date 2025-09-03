@@ -12,7 +12,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${pridi.variable} ${gantari.variable}`}>
       {/* make body use Gantari globally; titles will override to Pridi */}
-      <body className="min-h-screen antialiased bg-[#0f261c] text-neutral-100 font-sans">
+      <body className="min-h-screen antialiased bg-[#0f261c] font-sans">
         <SiteHeader />
         <main className="mx-auto w-full max-w-6xl px-4 pt-28">{children}</main>
       </body>
