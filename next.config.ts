@@ -1,10 +1,11 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  output: "export",
+import type { NextConfig } from "next";
+
+const config: NextConfig = {
+  output: "export",        
+  basePath: "",             
+  assetPrefix: "",           
   images: { unoptimized: true },
-  basePath: "/Aquatela-Tech",
-  assetPrefix: "/Aquatela-Tech/",
-  trailingSlash: true,
   eslint: { ignoreDuringBuilds: true },
+  trailingSlash: true        
 };
-export default nextConfig;
+export default config;
