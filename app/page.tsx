@@ -9,14 +9,16 @@ export default function HomePage() {
       {/* Hero full-bleed */}
       <header
         className="relative isolate -mt-28 mx-[calc(50%-50vw)]"
-        style={{ ["--nav-h" as any]: "7rem" }}
+        style={{ ["--nav-h" as any]: "clamp(3.6rem, 10vh, 7rem)" }}
       >
         <div className="absolute inset-0 -z-10 bg-[url('/map.png')] bg-cover bg-top" />
         <div className="absolute inset-0 -z-10 bg-black/40" />
 
-        <div className="min-h-[72vh] pt-[var(--nav-h)] grid place-items-center">
-          <div className="px-6 w-full max-w-[820px] mx-auto text-center -mt-14">
-            <h1 className="text-balance text-[clamp(36px,4.5vw,60px)] font-semibold tracking-tight font-display text-white">
+        {/* background touches top; content shifted down under nav */}
+        <div className="min-h-[65svh] pt-[calc(var(--nav-h)+env(safe-area-inset-top)+32px)] pb-12 grid place-items-center
+                        [@media(max-height:700px)]:pt-[calc(var(--nav-h)+env(safe-area-inset-top)+44px)]">
+          <div className="relative z-10 px-6 w-full max-w-[820px] mx-auto text-center mt-2">
+            <h1 className="text-balance text-[clamp(32px,4.2vw,56px)] font-semibold tracking-tight font-display text-white">
               Real-time water-quality insights
             </h1>
             <p className="mt-5 mx-auto max-w-[660px] text-[19px] lg:text-[21px] leading-[1.75] text-white/90">
@@ -24,22 +26,22 @@ export default function HomePage() {
               can see clear, trustworthy water data when it matters.
             </p>
 
-            <div className="mt-9 flex flex-wrap justify-center gap-5">
+            <div className="mt-7 flex flex-wrap justify-center gap-4">
               <Link
                 href="/about/mission"
-                className="rounded-xl border-2 border-teal-200/70 px-6 py-3.5 text-[17px] font-medium text-white hover:bg-teal-200/10 transition"
+                className="rounded-xl border-2 border-teal-200/70 px-5 py-3 text-[16px] font-medium text-white hover:bg-teal-200/10 transition"
               >
                 Our Mission
               </Link>
               <Link
                 href="/devices/proto-onda"
-                className="rounded-xl border-2 border-teal-200/70 px-6 py-3.5 text-[17px] font-medium text-white hover:bg-teal-200/10 transition"
+                className="rounded-xl border-2 border-teal-200/70 px-5 py-3 text-[16px] font-medium text-white hover:bg-teal-200/10 transition"
               >
                 Devices
               </Link>
               <Link
                 href="/contact"
-                className="rounded-xl border-2 border-teal-200/70 px-6 py-3.5 text-[17px] font-medium text-white hover:bg-teal-200/10 transition"
+                className="rounded-xl border-2 border-teal-200/70 px-5 py-3 text-[16px] font-medium text-white hover:bg-teal-200/10 transition"
               >
                 Get Involved
               </Link>
