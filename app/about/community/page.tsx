@@ -43,7 +43,7 @@ export default function CommunityPage() {
           first buoy, Proto Onda, in the water on his property in Northeast Minneapolis. That launch
           let us collect real data and also showed us challenges like changing river levels and
           site specifics that shaped how we improved our design.{" "}
-          <Link href="/devices/proto-onda" className="underline underline-offset-4">
+          <Link href="/devices/proto-onda" className="font-semibold underline underline-offset-4 hover:text-teal-200/60">
             Read more about Proto Onda here
           </Link>
           .
@@ -77,7 +77,7 @@ export default function CommunityPage() {
 
         <p>
           We are starting local, and our vision is global.{" "}
-          <Link href="/contact" className="underline underline-offset-4">
+          <Link href="/contact" className="font-semibold underline underline-offset-4 hover:text-teal-200/60">
             Visit our Contact Us page
           </Link>{" "}
           to get connected, whether you are a data nerd, a nature lover, or someone who cares.

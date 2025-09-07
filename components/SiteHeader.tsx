@@ -1,9 +1,11 @@
-// components/SiteHeader.tsx
 "use client";
 
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
+import type React from "react";
+
+type CSSVar = React.CSSProperties & Record<`--${string}`, string | number>;
 
 type OpenKey = "about" | "devices" | null;
 
@@ -47,9 +49,11 @@ export default function SiteHeader() {
   }, [open]);
 
   const spacerHeight = (open ? 8 : 0) + submenuMeasured; // 8px = mt-2
+  const cardVars: CSSVar = { "--spacer": `${spacerHeight}px` };
 
   const cancelFlip = () => {
-    const logo = logoRef.current, title = titleRef.current;
+    const logo = logoRef.current;
+    const title = titleRef.current;
     if (!logo || !title) return;
     logo.style.transition = "";
     title.style.transition = "";
@@ -60,8 +64,12 @@ export default function SiteHeader() {
 
   const runFlipBack = () => {
     if (flipRunning.current) return;
-    const logo = logoRef.current, title = titleRef.current;
-    if (!logo || !title) { setStack(false); return; }
+    const logo = logoRef.current;
+    const title = titleRef.current;
+    if (!logo || !title) {
+      setStack(false);
+      return;
+    }
     flipRunning.current = true;
 
     const l1 = logo.getBoundingClientRect();
@@ -81,7 +89,7 @@ export default function SiteHeader() {
         const dxT = t1.left - t2.left;
         const dyT = t1.top - t2.top;
 
-        logo.style.transform  = `translate(${dxL}px, ${dyL}px) scale(${s}) translateZ(0)`;
+        logo.style.transform = `translate(${dxL}px, ${dyL}px) scale(${s}) translateZ(0)`;
         title.style.transform = `translate(${dxT}px, ${dyT}px) translateZ(0)`;
         void logo.offsetWidth;
 
@@ -89,7 +97,7 @@ export default function SiteHeader() {
         logo.style.transition = trans;
         title.style.transition = trans;
 
-        logo.style.transform  = "translate(0,0) scale(1) translateZ(0)";
+        logo.style.transform = "translate(0,0) scale(1) translateZ(0)";
         title.style.transform = "translate(0,0) translateZ(0)";
 
         const done = (e: TransitionEvent) => {
@@ -111,7 +119,6 @@ export default function SiteHeader() {
       return;
     }
     if (stack) runFlipBack();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [open]);
 
   useEffect(() => {
@@ -119,10 +126,7 @@ export default function SiteHeader() {
       setOpen((o) => o);
       setIsDesktop(window.innerWidth >= 768);
     };
-    
-    // Set initial value
     setIsDesktop(window.innerWidth >= 768);
-    
     window.addEventListener("resize", onResize);
     return () => window.removeEventListener("resize", onResize);
   }, []);
@@ -139,8 +143,15 @@ export default function SiteHeader() {
     <svg
       aria-hidden="true"
       viewBox="0 0 20 20"
-      className={["h-4 w-4 transition-transform duration-300 ease-in-out", rotated ? "rotate-90" : "rotate-0"].join(" ")}
-      fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+      className={[
+        "h-4 w-4 transition-transform duration-300 ease-in-out",
+        rotated ? "rotate-90" : "rotate-0",
+      ].join(" ")}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     >
       <path d="M7 5l6 5-6 5" />
     </svg>
@@ -151,26 +162,34 @@ export default function SiteHeader() {
       <div className="px-4 sm:px-6 md:px-8">
         <div
           className="pointer-events-auto mx-auto max-w-5xl rounded-[2rem] backdrop-blur bg-white/30 supports-[backdrop-filter]:bg-white/10 shadow-lg px-6 sm:px-8 md:px-10 py-4"
-          style={{ ["--spacer" as any]: `${spacerHeight}px` } as React.CSSProperties}
+          style={cardVars}
         >
           <div
             className="grid items-center md:items-start"
-            style={{ gridTemplateColumns: "auto 1fr", gridTemplateRows: "auto auto", columnGap: "1.5rem" }}
+            style={{
+              gridTemplateColumns: "auto 1fr",
+              gridTemplateRows: "auto auto",
+              columnGap: "1.5rem",
+            }}
           >
-            {/* LEFT: logo + title (kept left, vertically centered on mobile) */}
+            {/* LEFT: logo + title */}
             <Link
               ref={linkRef}
               href="/"
-              className={`${stack ? "flex flex-col items-start justify-between" : "flex items-center gap-2"} ${isDesktop ? "self-center" : ""}`}
+              className={`${
+                stack ? "flex flex-col items-start justify-between" : "flex items-center gap-2"
+              } ${isDesktop ? "self-center" : ""}`}
               style={{
                 gridColumn: "1 / 2",
-                gridRow: isDesktop ? "1 / 3" : "1 / 2", // Span both rows on desktop, only first row on mobile
-                height: isDesktop 
-                  ? (stack ? "calc(28px + var(--spacer))" : "28px") 
-                  : "28px", // Dynamic height on desktop, fixed on mobile
+                gridRow: isDesktop ? "1 / 3" : "1 / 2",
+                height: isDesktop
+                  ? stack
+                    ? "calc(28px + var(--spacer))"
+                    : "28px"
+                  : "28px",
                 transition: `height ${D_OPEN}ms ${EASE}`,
                 willChange: "height",
-                ...(isDesktop ? {} : { display: "flex", alignItems: "center" }), // Only override alignment on mobile
+                ...(isDesktop ? {} : { display: "flex", alignItems: "center" }),
               }}
               aria-label="Aquatela Tech Home"
             >
@@ -190,12 +209,18 @@ export default function SiteHeader() {
                     : "none",
                   contain: "layout paint size",
                   willChange: "transform,width,height",
-                  backfaceVisibility: "hidden" as any,
+                  backfaceVisibility: "hidden",
                   transform: "translateZ(0)",
                   transformOrigin: "top left",
                 }}
               >
-                <Image src="/logo.png" alt="Aquatela Tech" fill className="object-contain rounded-md" priority />
+                <Image
+                  src="/logo.png"
+                  alt="Aquatela Tech"
+                  fill
+                  className="object-contain rounded-md"
+                  priority
+                />
               </span>
 
               <span
@@ -212,13 +237,13 @@ export default function SiteHeader() {
               </span>
             </Link>
 
-            {/* DESKTOP NAV (md and up) */}
+            {/* DESKTOP NAV */}
             <nav
               className="[font-family:var(--font-gantari)] justify-self-end hidden md:block"
               style={{ gridColumn: "2 / 3", gridRow: "1 / 2" }}
             >
               <div className="flex items-center gap-6">
-                {/* About Us */}
+                {/* About */}
                 <div className="relative">
                   <button
                     onMouseEnter={() => setOpen("about")}
@@ -226,7 +251,7 @@ export default function SiteHeader() {
                     aria-haspopup="true"
                     aria-expanded={open === "about"}
                   >
-                    <Underline>About Us</Underline>
+                    <Underline>About</Underline>
                     <Chevron rotated={open === "about"} />
                   </button>
                   <ul
@@ -305,9 +330,17 @@ export default function SiteHeader() {
                 {/* Contact */}
                 <div className="relative" onMouseEnter={() => setOpen(null)}>
                   <Link href="/contact" className="group whitespace-nowrap py-1 text-md">
-                    <Underline>Contact Us</Underline>
+                    <Underline>Contact</Underline>
                   </Link>
                 </div>
+
+                {/* Donate */}
+                <Link
+                  href="/donate"
+                  className="inline-flex items-center rounded-full border border-white/40 px-3 py-[6px] text-md hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/50"
+                >
+                  Donate
+                </Link>
               </div>
             </nav>
 
@@ -322,18 +355,27 @@ export default function SiteHeader() {
                 onClick={() => setMobileOpen((v) => !v)}
                 className="inline-flex h-10 w-10 items-center justify-center rounded-xl outline-none focus:outline-none focus-visible:outline-none ring-0 focus:ring-0"
               >
-                {/* Transparent by default; apply hover-only glass tint */}
                 <span className="absolute inset-0 rounded-xl transition-colors duration-200 hover:bg-white/45 supports-[backdrop-filter]:hover:bg-white/35 hover:backdrop-blur pointer-events-none" />
                 <span className="sr-only">Menu</span>
                 <svg
-                  className={`h-6 w-6 transition-transform duration-300 ${mobileOpen ? "rotate-90 opacity-0" : "opacity-100"}`}
-                  viewBox="0 0 24 24" stroke="currentColor" fill="none" strokeWidth="2"
+                  className={`h-6 w-6 transition-transform duration-300 ${
+                    mobileOpen ? "rotate-90 opacity-0" : "opacity-100"
+                  }`}
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  fill="none"
+                  strokeWidth="2"
                 >
                   <path d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
                 <svg
-                  className={`-ml-6 h-6 w-6 transition-all duration-300 ${mobileOpen ? "opacity-100 rotate-0" : "opacity-0 -rotate-90"}`}
-                  viewBox="0 0 24 24" stroke="currentColor" fill="none" strokeWidth="2"
+                  className={`-ml-6 h-6 w-6 transition-all duration-300 ${
+                    mobileOpen ? "opacity-100 rotate-0" : "opacity-0 -rotate-90"
+                  }`}
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  fill="none"
+                  strokeWidth="2"
                 >
                   <path d="M6 6l12 12M18 6L6 18" />
                 </svg>
@@ -346,7 +388,7 @@ export default function SiteHeader() {
               style={{
                 gridColumn: "2 / 3",
                 gridRow: "2 / 3",
-                height: `var(--spacer)` as any,
+                height: "var(--spacer)",
                 transition: `height ${D_OPEN}ms ${EASE}`,
                 pointerEvents: "none",
                 willChange: "height",
@@ -354,10 +396,7 @@ export default function SiteHeader() {
             />
 
             {/* MOBILE PANEL */}
-            <div
-              className="md:hidden"
-              style={{ gridColumn: "1 / 3", gridRow: "2 / 3" }}
-            >
+            <div className="md:hidden" style={{ gridColumn: "1 / 3", gridRow: "2 / 3" }}>
               <div
                 className={[
                   "overflow-hidden transition-[max-height,opacity] duration-300 ease-out",
@@ -365,17 +404,15 @@ export default function SiteHeader() {
                 ].join(" ")}
               >
                 <ul className="[font-family:var(--font-gantari)] pt-3 pb-1 text-base">
-                  {/* About Us */}
+                  {/* About */}
                   <li className="border-t border-white/40">
                     <button
                       className="group flex w-full items-center justify-between py-3"
-                      onClick={() =>
-                        setMobileSub((s) => (s === "about" ? null : "about"))
-                      }
+                      onClick={() => setMobileSub((s) => (s === "about" ? null : "about"))}
                       aria-expanded={mobileSub === "about"}
                       aria-controls="m-about-sub"
                     >
-                      <Underline>About Us</Underline>
+                      <Underline>About</Underline>
                       <Chevron rotated={mobileSub === "about"} />
                     </button>
                     <ul
@@ -405,9 +442,7 @@ export default function SiteHeader() {
                   <li className="border-t border-white/40">
                     <button
                       className="group flex w-full items-center justify-between py-3"
-                      onClick={() =>
-                        setMobileSub((s) => (s === "devices" ? null : "devices"))
-                      }
+                      onClick={() => setMobileSub((s) => (s === "devices" ? null : "devices"))}
                       aria-expanded={mobileSub === "devices"}
                       aria-controls="m-devices-sub"
                     >
@@ -444,15 +479,24 @@ export default function SiteHeader() {
                       className="group block py-3"
                       onClick={() => setMobileOpen(false)}
                     >
-                      <Underline>Contact Us</Underline>
+                      <Underline>Contact</Underline>
                     </Link>
                   </li>
 
+                  {/* Donate */}
+                  <li className="border-t border-white/40">
+                    <Link
+                      href="/donate"
+                      className="group block py-3"
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      <Underline>Donate</Underline>
+                    </Link>
+                  </li>
                   <li className="border-t border-white/40" />
                 </ul>
               </div>
             </div>
-
           </div>
         </div>
       </div>

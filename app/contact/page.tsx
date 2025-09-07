@@ -27,7 +27,7 @@ export default function ContactPage() {
           Please email us at{" "}
           <a
             href="mailto:info@aquatela.tech"
-            className="underline font-semibold text-lg lg:text-xl"
+            className="font-semibold underline underline-offset-4 hover:text-teal-200/60"
           >
             info@aquatela.tech
           </a>{" "}
@@ -68,13 +68,18 @@ export default function ContactPage() {
           <h2 className="text-xl font-semibold font-display text-white mb-2">Funds</h2>
           <div className="h-px bg-teal-200/70 mb-3" />
           <p>
-            Every dollar helps us build affordable monitoring devices and expand access to clean water data.
-            If you are interested in contributing, please let us know:
+            Small community donations can be made directly through our{" "}
+            <a href="/donate" 
+               className="font-semibold underline underline-offset-4 hover:text-teal-200/60">
+              Donate page
+            </a>
+            . If you are considering a larger contribution that goes beyond what can be handled there, we
+            would love to connect directly. Please let us know:
           </p>
           <ul className="list-disc list-inside mt-2 space-y-1">
-            <li>The amount you would like to give</li>
+            <li>The amount you are interested in contributing</li>
             <li>
-              If you would like your donation to support a specific initiative (for example buoy
+              Whether you would like your support to go toward a specific initiative (for example buoy
               development, dashboard improvements, or outreach)
             </li>
           </ul>

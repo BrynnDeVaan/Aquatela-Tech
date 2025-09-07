@@ -129,7 +129,7 @@ export default function TeamPage() {
             We’re currently seeking a mentor with expertise in water health, environmental
             science, or aquatic ecosystems to strengthen our impact even further. If this sounds
             like you,{" "}
-            <Link href="/contact" className="underline underline-offset-4">
+            <Link href="/contact" className="font-semibold underline underline-offset-4 hover:text-teal-200/60">
               visit our Contact Us page
             </Link>
             .

@@ -1,15 +1,19 @@
-// app/page.tsx
 "use client";
 import Link from "next/link";
 import Image from "next/image";
+import type React from "react";
+
+type CSSVar = React.CSSProperties & Record<`--${string}`, string | number>;
 
 export default function HomePage() {
+  const headerVars: CSSVar = { "--nav-h": "clamp(3.6rem, 10vh, 7rem)" };
+
   return (
     <main className="w-full mx-auto">
       {/* Hero full-bleed */}
       <header
         className="relative isolate -mt-28 mx-[calc(50%-50vw)]"
-        style={{ ["--nav-h" as any]: "clamp(3.6rem, 10vh, 7rem)" }}
+        style={headerVars}
       >
         <div className="absolute inset-0 -z-10 bg-[url('/map.png')] bg-cover bg-top" />
         <div className="absolute inset-0 -z-10 bg-black/40" />
@@ -94,7 +98,7 @@ export default function HomePage() {
         </p>
         <Link
           href="/about/community"
-          className="inline-block underline underline-offset-4 hover:text-teal-200/60"
+          className="font-semibold underline underline-offset-4 hover:text-teal-200/60"
         >
           Read about our community
         </Link>
@@ -120,7 +124,7 @@ export default function HomePage() {
         </p>
         <Link
           href="/devices/proto-onda"
-          className="inline-block underline underline-offset-4 hover:text-teal-200/60"
+          className="font-semibold underline underline-offset-4 hover:text-teal-200/60"
         >
           Explore Proto Onda
         </Link>
@@ -137,7 +141,7 @@ export default function HomePage() {
           water data.
         </p>
         <p className="mb-4">
-          <Link href="/contact" className="underline underline-offset-4 hover:text-teal-200/60">
+          <Link href="/contact" className="font-semibold underline underline-offset-4 hover:text-teal-200/60">
             Visit our Contact Us page
           </Link>
         </p>
