@@ -4,6 +4,7 @@ import SiteHeader from "../components/SiteHeader";
 import { Pridi, Gantari } from "next/font/google";
 import Script from "next/script";
 import type React from "react";
+import SurveyPopup from "@/components/SurveyPopup";
 
 const pridi = Pridi({ weight: ["400"], subsets: ["latin"], variable: "--font-pridi" });
 const gantari = Gantari({ weight: ["400","600"], subsets: ["latin"], variable: "--font-gantari" });
@@ -20,6 +21,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className="min-h-screen antialiased bg-[#0f261c] font-sans">
         <SiteHeader />
         <main className="mx-auto w-full max-w-6xl px-4 pt-28">{children}</main>
+        <SurveyPopup />
       </body>
     </html>
   );

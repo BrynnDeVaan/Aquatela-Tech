@@ -161,7 +161,7 @@ export default function SiteHeader() {
     <div className="fixed inset-x-0 top-4 z-50 pointer-events-none" onMouseLeave={onMouseLeaveAll}>
       <div className="px-4 sm:px-6 md:px-8">
         <div
-          className="pointer-events-auto mx-auto max-w-5xl rounded-[2rem] backdrop-blur bg-white/30 supports-[backdrop-filter]:bg-white/10 shadow-lg px-6 sm:px-8 md:px-10 py-4"
+          className="pointer-events-auto mx-auto max-w-5xl rounded-[2rem] backdrop-blur-lg bg-white/30 supports-[backdrop-filter]:bg-emerald-100/10 shadow-lg px-6 sm:px-8 md:px-10 py-4"
           style={cardVars}
         >
           <div

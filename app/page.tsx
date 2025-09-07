@@ -2,53 +2,38 @@
 import Link from "next/link";
 import Image from "next/image";
 import type React from "react";
+import SurveyCta from "@/components/SurveyCTA";
 
 type CSSVar = React.CSSProperties & Record<`--${string}`, string | number>;
 
 export default function HomePage() {
-  const headerVars: CSSVar = { "--nav-h": "clamp(3.6rem, 10vh, 7rem)" };
+  const headerVars: CSSVar = {
+    "--nav-h": "clamp(3.6rem, 10vh, 7rem)",
+    "--fs-body": "clamp(18px, 2.6vw, 22px)",
+    "--fs-title": "48px",
+  };
 
   return (
     <main className="w-full mx-auto">
       {/* Hero full-bleed */}
-      <header
-        className="relative isolate -mt-28 mx-[calc(50%-50vw)]"
-        style={headerVars}
-      >
+      <header className="relative isolate -mt-28 mx-[calc(50%-50vw)]" style={headerVars}>
         <div className="absolute inset-0 -z-10 bg-[url('/map.png')] bg-cover bg-top" />
         <div className="absolute inset-0 -z-10 bg-black/40" />
 
-        {/* background touches top; content shifted down under nav */}
-        <div className="min-h-[65svh] pt-[calc(var(--nav-h)+env(safe-area-inset-top)+32px)] pb-12 grid place-items-center
-                        [@media(max-height:700px)]:pt-[calc(var(--nav-h)+env(safe-area-inset-top)+44px)]">
+        <div className="min-h-[65svh] pt-[calc(var(--nav-h)+env(safe-area-inset-top)+32px)] pb-12 grid place-items-center [@media(max-height:700px)]:pt-[calc(var(--nav-h)+env(safe-area-inset-top)+44px)]">
           <div className="relative z-10 px-6 w-full max-w-[820px] mx-auto text-center mt-2">
-            <h1 className="text-balance text-[clamp(32px,4.2vw,56px)] font-semibold tracking-tight font-display text-white">
+            <h1 style={{ fontSize: "var(--fs-title)" }} className="text-balance font-semibold tracking-tight font-display text-white">
               Real-time water-quality insights
             </h1>
-            <p className="mt-5 mx-auto max-w-[660px] text-[19px] lg:text-[21px] leading-[1.75] text-white/90">
+            <p style={{ fontSize: "var(--fs-body)" }} className="mt-5 mx-auto max-w-[660px] leading-[1.75] text-white/90">
               Aquatela Tech builds affordable monitoring devices and a unified dashboard so communities
               can see clear, trustworthy water data when it matters.
             </p>
 
             <div className="mt-7 flex flex-wrap justify-center gap-4">
-              <Link
-                href="/about/mission"
-                className="rounded-xl border-2 border-teal-200/70 px-5 py-3 text-[16px] font-medium text-white hover:bg-teal-200/10 transition"
-              >
-                Our Mission
-              </Link>
-              <Link
-                href="/devices/proto-onda"
-                className="rounded-xl border-2 border-teal-200/70 px-5 py-3 text-[16px] font-medium text-white hover:bg-teal-200/10 transition"
-              >
-                Devices
-              </Link>
-              <Link
-                href="/contact"
-                className="rounded-xl border-2 border-teal-200/70 px-5 py-3 text-[16px] font-medium text-white hover:bg-teal-200/10 transition"
-              >
-                Get Involved
-              </Link>
+              <Link href="/about/mission" className="rounded-xl border-2 border-teal-200/70 px-5 py-3 text-[16px] font-medium text-white hover:bg-teal-200/10 transition">Our Mission</Link>
+              <Link href="/devices/proto-onda" className="rounded-xl border-2 border-teal-200/70 px-5 py-3 text-[16px] font-medium text-white hover:bg-teal-200/10 transition">Devices</Link>
+              <Link href="/contact" className="rounded-xl border-2 border-teal-200/70 px-5 py-3 text-[16px] font-medium text-white hover:bg-teal-200/10 transition">Get Involved</Link>
             </div>
           </div>
         </div>
@@ -56,17 +41,9 @@ export default function HomePage() {
 
       {/* What we do */}
       <section className="w-full max-w-[760px] mx-auto px-6 pt-14 pb-10 space-y-4 text-[17px] lg:text-[18px] leading-[1.7]">
-        <h2 className="text-[clamp(22px,2.5vw,30px)] font-semibold font-display text-white">
-          What we do
-        </h2>
+        <h2 className="text-[clamp(22px,2.5vw,30px)] font-semibold font-display text-white">What we do</h2>
         <div className="h-px bg-teal-200/70 mb-4" />
-        <Image
-          src="/home-photo-1.jpg"
-          alt="What we do"
-          width={1200}
-          height={200}
-          className="w-full h-[80px] sm:h-[100px] object-cover rounded-xl"
-        />
+        <Image src="/home-photo-1.jpg" alt="What we do" width={1200} height={200} className="w-full h-[80px] sm:h-[100px] object-cover rounded-xl" />
         <p>
           Waterways change fast. Flooding, pollution, and aging infrastructure can shift conditions
           day to day. People need simple ways to track what is happening in local lakes and rivers.
@@ -80,61 +57,37 @@ export default function HomePage() {
 
       {/* Twin Cities */}
       <section className="w-full max-w-[760px] mx-auto px-6 pb-10 space-y-4 text-[17px] lg:text-[18px] leading-[1.7]">
-        <h2 className="text-[clamp(22px,2.5vw,30px)] font-semibold font-display text-white">
-          Rooted in the Twin Cities
-        </h2>
+        <h2 className="text-[clamp(22px,2.5vw,30px)] font-semibold font-display text-white">Rooted in the Twin Cities</h2>
         <div className="h-px bg-teal-200/70 mb-4" />
-        <Image
-          src="/home-photo-2.jpg"
-          alt="Twin Cities"
-          width={1200}
-          height={200}
-          className="w-full h-[80px] sm:h-[100px] object-cover rounded-xl"
-        />
+        <Image src="/home-photo-2.jpg" alt="Twin Cities" width={1200} height={200} className="w-full h-[80px] sm:h-[100px] object-cover rounded-xl" />
         <p>
           We grew up around lakes and rivers in Minneapolis–Saint Paul. Conversations with
           neighbors, stories of sick pets and flooded homes, and repeated beach closures shaped our
           focus. Access to water information is unequal. We aim to close that gap.
         </p>
-        <Link
-          href="/about/community"
-          className="font-semibold underline underline-offset-4 hover:text-teal-200/60"
-        >
+        <Link href="/about/community" className="font-semibold underline underline-offset-4 hover:text-teal-200/60">
           Read about our community
         </Link>
       </section>
 
       {/* Building the platform */}
       <section className="w-full max-w-[760px] mx-auto px-6 pb-10 space-y-4 text-[17px] lg:text-[18px] leading-[1.7]">
-        <h2 className="text-[clamp(22px,2.5vw,30px)] font-semibold font-display text-white">
-          Building the platform
-        </h2>
+        <h2 className="text-[clamp(22px,2.5vw,30px)] font-semibold font-display text-white">Building the platform</h2>
         <div className="h-px bg-teal-200/70 mb-4" />
-        <Image
-          src="/home-photo-3.jpeg"
-          alt="Building the platform"
-          width={1200}
-          height={200}
-          className="w-full h-[80px] sm:h-[100px] object-cover rounded-xl"
-        />
+        <Image src="/home-photo-3.jpeg" alt="Building the platform" width={1200} height={200} className="w-full h-[80px] sm:h-[100px] object-cover rounded-xl" />
         <p>
           Our first deployed buoy informed the dashboard design and field practices in moving water
           under changing levels. Now we are expanding to stream key water qualities into an active
           database and a single, easy interface.
         </p>
-        <Link
-          href="/devices/proto-onda"
-          className="font-semibold underline underline-offset-4 hover:text-teal-200/60"
-        >
+        <Link href="/devices/proto-onda" className="font-semibold underline underline-offset-4 hover:text-teal-200/60">
           Explore Proto Onda
         </Link>
       </section>
 
-      {/* Contact */}
+      {/* Get involved */}
       <section className="w-full max-w-[760px] mx-auto px-6 pb-16 text-[17px] lg:text-[18px] leading-[1.7]">
-        <h2 className="text-[clamp(22px,2.5vw,30px)] font-semibold font-display text-white mb-3">
-          Get involved
-        </h2>
+        <h2 className="text-[clamp(22px,2.5vw,30px)] font-semibold font-display text-white mb-3">Get involved</h2>
         <div className="h-px bg-teal-200/70 mb-4" />
         <p className="mb-3">
           Support with time, services, or funds. Every contribution helps expand access to clear
@@ -145,6 +98,9 @@ export default function HomePage() {
             Visit our Contact Us page
           </Link>
         </p>
+
+        {/* New Survey block under Get involved */}
+        <SurveyCta />
       </section>
     </main>
   );
