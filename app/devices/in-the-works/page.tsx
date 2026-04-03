@@ -12,14 +12,13 @@ export default function InTheWorksPage() {
 
       <div className="space-y-8 text-[17px] lg:text-[18px] leading-[1.7]">
         <p>
-          Right now, we’re in the exciting (and sometimes messy) stage of building what comes next.
-          Our team is setting up our office space and applying for grants to help fund development of
-          the next generation of our device.
+          This summer, Aquatela Tech is focused on deploying four monitoring systems across the Twin Cities, 
+          with two installations along the Mississippi River in Minneapolis and two deployments in Lake Minnetonka.
         </p>
 
         <Image
-          src="/in-the-works-photo-1.jpg"
-          alt="Workspace and early build efforts"
+          src="/2026-deployment-map.png"
+          alt="Map of 2026 Device Deployments"
           width={0}
           height={0}
           sizes="100vw"
@@ -29,20 +28,53 @@ export default function InTheWorksPage() {
         />
 
         <p>
-          The newest prototype focuses on relaying two core qualities of water directly into our active
-          database. But hardware is just one piece of the puzzle, we’re also working on connecting
-          information from multiple sources and compiling it into a single, easy-to-use dashboard.
+          Along the Mississippi, we will be installing two dock-mounted monitoring systems, referred to as Aquatela 
+          Current, which are designed to continuously track core water quality metrics such as temperature, total 
+          dissolved solids (TDS), and electrical conductivity (EC), while transmitting that data directly to our 
+          dashboard. This marks an important step for us, as it is our first time deploying a fixed, dock-based 
+          system in a flowing river environment, and we are particularly interested in understanding how consistent, 
+          real-time data behaves in a system with constant movement and variability.
         </p>
 
-        <Image
-          src="/in-the-works-photo-2.jpg"
-          alt="Prototype and data integration preview"
-          width={0}
-          height={0}
-          sizes="100vw"
-          style={{ width: "100%", height: "auto" }}
-          className="rounded-3xl"
-        />
+        <p>
+          In parallel, we are deploying two floating buoy systems, Aquatela Hydro Drift, in Lake Minnetonka. These 
+          deployments allow us to test our system in a contrasting environment, where water conditions are more stable 
+          and influenced by different ecological and human factors, while still collecting comparable data across locations.
+        </p>
+
+        {/* Photos of 2026 Devices*/}
+        <div className="grid grid-cols-2 gap-4">
+          <Image
+            src="/current.jpg"
+            alt="Aquatela Current Dock Device"
+            width={0}
+            height={0}
+            sizes="50vw"
+            style={{ width: "100%", height: "auto" }}
+            className="rounded-3xl"
+          />
+          <Image
+            src="/hydro-drift.jpg"
+            alt="Aquatela Hydro Drift Buoy"
+            width={0}
+            height={0}
+            sizes="50vw"
+            style={{ width: "100%", height: "auto" }}
+            className="rounded-3xl"
+          />
+        </div>
+
+        <p>
+          Our goal this summer is not just deployment, but expansion in both technical capability and community engagement. 
+          We are actively working on improving the usability and clarity of our dashboard, refining hardware design based on 
+          real-world conditions, and building stronger relationships with the communities and stakeholders connected to each 
+          deployment site.
+        </p>
+
+        <p>This phase is ultimately about understanding what works in practice, not just in theory, and using that understanding 
+          to guide how Aquatela can remain both accessible and affordable as we continue to grow.
+        </p>
+
       </div>
     </main>
   );
